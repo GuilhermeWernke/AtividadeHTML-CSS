@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Document</title>
+        
+        <style>
+            
+            *
+            {
+                
+                margin: 0;
+                padding: 0;
+                
+            }
+            
+            body 
+            {
+                
+                font-family: "Catamaran", sans-serif;
+                background-color: #19242f;
+                color: #eee;
+                
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                
+                height: 100vh;
+                
+            }
+            
+            .nome
+            {
+                
+                background-color: #eee;
+                
+                padding: 10px;
+                border-radius: 3px;
+                
+                justify-content: center;
+                
+            }
+            
+            p
+            {
+                
+                color: #19242f;
+                
+            }
+            
+        </style>
+        
+    </head>
+    
+    <body>
+        
+        <div class="nome">
+            
+            <input>Guilherme, o GOAT</input>
+            
+            <p></p>
+            
+        </div>
+        
+        
+        
+        <script>
+            
+            const input = document.querySelector('input');
+            const p = document.querySelector('p');
+            
+            
+            
+            input.addEventListener('keydown', 
+            function()
+            {
+                
+                if (input.minLength(3))
+                {
+                    
+                    if (input == "chocolate")
+                    {
+                        
+                        p.textContent = "Eu amo sorvete de chocolate!";
+                        
+                    }
+                    else if (input == "chocolate")
+                    {
+                        
+                        p.textContent = "Ahh, mas chocolate é o meu favorito...";
+                        
+                    }
+                    else
+                    {
+                        
+                        p.textContent = "“Ahh, eu esperava um sabor de sorvete...";
+                        
+                    }
+                    
+                }
+                
+            });
+            
+        </script>
+        
+    </body>
+    
+</html>
