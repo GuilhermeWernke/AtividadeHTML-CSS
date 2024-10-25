@@ -35,7 +35,7 @@
                 
             }
             
-            .nome
+            .container
             {
                 
                 background-color: #eee;
@@ -43,6 +43,9 @@
                 padding: 10px;
                 border-radius: 3px;
                 
+                display: flex;
+                flex-direction: column;
+                align-items: center;
                 justify-content: center;
                 
             }
@@ -60,7 +63,7 @@
     
     <body>
         
-        <div class="nome">
+        <div class="container">
             
             <input>Guilherme, o GOAT</input>
             
@@ -77,20 +80,22 @@
             
             
             
-            input.addEventListener('keydown', 
+            input.addEventListener('keyup', 
             function()
             {
                 
-                if (input.minLength(3))
+                let texto = input.value;
+                
+                if (texto.length > 3)
                 {
                     
-                    if (input == "chocolate")
+                    if (texto == "chocolate")
                     {
                         
                         p.textContent = "Eu amo sorvete de chocolate!";
                         
                     }
-                    else if (input == "chocolate")
+                    else if (texto == "flocos")
                     {
                         
                         p.textContent = "Ahh, mas chocolate é o meu favorito...";
