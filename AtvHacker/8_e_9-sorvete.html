@@ -26,7 +26,7 @@
             {
                 
                 font-family: "Catamaran", sans-serif;
-                background-color: rgb(25, 36, 47);
+                background-color: #19242f;
                 color: #eee;
                 
                 display: flex;
@@ -42,15 +42,17 @@
             .container
             {
                 
-                background-color: #eee;
+                background-color: tomato; /* #eee */
                 
                 padding: 10px;
                 border-radius: 3px;
+                border: 2px #19242f;
                 
                 display: flex;
                 flex-direction: column;
                 
                 align-items: center;
+                gap: 5px;
                 
             }
             
@@ -72,7 +74,7 @@
         
     </head>
     
-    <body id="01">
+    <body>
         
         <div class="container">
             
@@ -90,6 +92,14 @@
             
             const input = document.querySelector('input');
             const p = document.querySelector('p');
+            
+            function trocaClasse(elemento, antiga, nova) 
+            {
+                
+                elemento.classList.remove(antiga);
+                elemento.classList.add(nova);
+                
+            }
             
             
             
@@ -135,31 +145,35 @@
             ()=>
             {
                 
-                let tipo = document.getElementsByClassName('modoEscuro');
+                let tipo = document.querySelector('a');
+                let texto = document.querySelector('p');
+                let container = document.querySelector('container');
                 
-                if (tipo.innerHTML == '<i class="bi bi-brightness-high></i>')
+                if (tipo.classList.contains('modoEscuro'))
                 {
                     
-                    console.log("a")
+                    document.querySelector('.modoEscuro').innerHTML = '<i class="bi bi-brightness-high"></i>';
+                    document.body.style.color = '#19242f';
+                    document.body.style.background = '#eee'; //#19242f
+                    texto.style.color='#eee';
+                    tipo.style.color='#eee';
                     
-                    document.querySelector('.modoEscuro').innerHTML = '<i class="bi bi-brightness-high-fill">a</i>';
-                    document.getElementById('01').style.background = '#eee';
-                    document.getElementById('01').style.color = '#19242f';
-                    document.getElementsByClassName('container').style.background = '#eee';
-                    document.getElementsByClassName('x').style.color = '#eee';
-                    document.getElementsByClassName('a').style.color = '#eee';
+                    trocaClasse(tipo, 'modoEscuro', 'modoClaro');
                     
                 }
-                else
+                else if (tipo.classList.contains('modoClaro'))
                 {
                     
-                    console.log("b")
+                    console.log(tipo.value)
+                    console.log("foi")
                     
-                    document.querySelector('.modoEscuro').innerHTML = '<i class="bi bi-brightness-high>a</i>';
-                    document.body.style.color = 'aliceblue';
-                    document.body.style.background = "grey"; //#19242f
-                    document.getElementsByClassName('p').style.color='grey';
-                    document.getElementsByClassName('a').style.color='grey';
+                    document.querySelector('.modoClaro').innerHTML = '<i class="bi bi-brightness-high-fill"></i>';
+                    document.body.style.color = '#eee';
+                    document.body.style.background = '#19242f'; //#19242f
+                    texto.style.color='#19242f';
+                    tipo.style.color='#19242f';
+                    
+                    trocaClasse(tipo, 'modoClaro', 'modoEscuro');
                     
                 }
                 
