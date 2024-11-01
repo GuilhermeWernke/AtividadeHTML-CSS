@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        
+        <title>Document</title>
+        
+        <style>
+            
+            *
+            {
+                
+                margin: 0;
+                padding: 0;
+                
+            }
+            
+            body 
+            {
+                
+                font-family: "Catamaran", sans-serif;
+                background-color: rgb(25, 36, 47);
+                color: #eee;
+                
+                display: flex;
+                flex-direction: column;
+                
+                justify-content: center;
+                align-items: center;
+                
+                height: 100vh;
+                
+            }
+            
+            .container
+            {
+                
+                background-color: #eee;
+                
+                padding: 10px;
+                border-radius: 3px;
+                
+                display: flex;
+                flex-direction: column;
+                
+                align-items: center;
+                
+            }
+            
+            p
+            {
+                
+                color: #19242f;
+                
+            }
+            
+            i
+            {
+                
+                color: #19242f;
+                
+            }
+            
+        </style>
+        
+    </head>
+    
+    <body id="01">
+        
+        <div class="container">
+            
+            <input></input>
+            
+            <p></p>
+            
+            <a class="modoEscuro"><i class="bi bi-brightness-high-fill"></i></a>
+            
+        </div>
+        
+        
+        
+        <script>
+            
+            const input = document.querySelector('input');
+            const p = document.querySelector('p');
+            
+            
+            
+            input.addEventListener('keyup', 
+            function()
+            {
+                
+                let texto = input.value;
+                
+                if (texto.length > 3)
+                {
+                    
+                    if (texto == "chocolate")
+                    {
+                        
+                        p.textContent = "Eu amo sorvete de chocolate!";
+                        
+                    }
+                    else if (texto == "flocos")
+                    {
+                        
+                        p.textContent = "Ahh, mas chocolate é o meu favorito...";
+                        
+                    }
+                    else
+                    {
+                        
+                        p.textContent = "Ahh, eu esperava um sabor de sorvete...";
+                        
+                    }
+                    
+                }
+                else
+                {
+                    
+                    p.textContent = "";
+                    
+                }
+                
+            });
+            
+            document.querySelector('.modoEscuro').addEventListener('click', 
+            ()=>
+            {
+                
+                let tipo = document.getElementsByClassName('modoEscuro');
+                
+                if (tipo.innerHTML == '<i class="bi bi-brightness-high></i>')
+                {
+                    
+                    console.log("a")
+                    
+                    document.querySelector('.modoEscuro').innerHTML = '<i class="bi bi-brightness-high-fill">a</i>';
+                    document.getElementById('01').style.background = '#eee';
+                    document.getElementById('01').style.color = '#19242f';
+                    document.getElementsByClassName('container').style.background = '#eee';
+                    document.getElementsByClassName('x').style.color = '#eee';
+                    document.getElementsByClassName('a').style.color = '#eee';
+                    
+                }
+                else
+                {
+                    
+                    console.log("b")
+                    
+                    document.querySelector('.modoEscuro').innerHTML = '<i class="bi bi-brightness-high>a</i>';
+                    document.body.style.color = 'aliceblue';
+                    document.body.style.background = "grey"; //#19242f
+                    document.getElementsByClassName('p').style.color='grey';
+                    document.getElementsByClassName('a').style.color='grey';
+                    
+                }
+                
+            });
+            
+        </script>
+        
+    </body>
+    
+</html>

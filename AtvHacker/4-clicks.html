@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Document</title>
+        
+        <style>
+            
+            *
+            {
+                
+                margin: 0;
+                padding: 0;
+                
+            }
+            
+            body 
+            {
+                
+                font-family: "Catamaran", sans-serif;
+                background-color: #19242f;
+                color: #eee;
+                
+                display: flex;
+                flex-direction: column;
+                
+                justify-content: center;
+                align-items: center;
+                
+                height: 100vh;
+                
+            }
+            
+            p
+            {
+                
+                font-size: 50px;
+                
+            }
+            
+            button
+            {
+                
+                font-size: 30px;
+                padding: 10px 20px;
+                background-color: #4CAF50;
+                
+            }
+            
+        </style>
+        
+    </head>
+    
+    <body>
+        
+        <p>0</p>
+        
+        <button>Clique-me</button>
+        
+        <script>
+            
+            const p = document.querySelector('p');
+            let contador = 0;
+            
+            let button = document.querySelector('button');
+            
+            button.addEventListener('click', 
+            function()
+            {
+                
+                contador++;
+                p.innerText = contador;
+                
+            });
+            
+            
+            
+        </script>
+        
+    </body>
+    
+</html>
