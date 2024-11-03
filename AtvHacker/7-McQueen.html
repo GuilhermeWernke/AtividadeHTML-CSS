@@ -44,12 +44,11 @@
                 
             }
             
-            button
+            img
             {
                 
-                font-size: 30px;
-                padding: 10px 20px;
-                background-color: #4CAF50;
+                border: 3px solid black;
+                border-radius: 20px;
                 
             }
             
@@ -59,23 +58,74 @@
     
     <body>
         
-        <p>0</p>
+        <p>Olá, sou Relampago McQueen!</p>
         
-        <button>Clique-me</button>
+        <img id="01" class="McQueen" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdh7r_GnXJNbvMnK05NHPAUkj8sifImorbiQ&s">
+        
+        
+        
         
         <script>
             
             const p = document.querySelector('p');
-            let contador = 0;
+            const img = document.querySelector('img');
             
-            let button = document.querySelector('button');
-            
-            button.addEventListener('click', 
+            img.addEventListener('mouseenter', 
             function()
             {
                 
-                contador++;
-                p.innerText = contador;
+                setTimeout(function()
+                {
+                    
+                    p.innerText = "Olá, sou Relampago McQueen!";
+                    img.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdh7r_GnXJNbvMnK05NHPAUkj8sifImorbiQ&s';
+                    
+                }, 1000);
+                
+            });
+            
+            img.addEventListener('mouseleave', 
+            function()
+            {
+                
+                setTimeout(function()
+                {
+                    
+                    p.innerText = "Já vai embora?!";
+                    img.src = 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLS8EEFgmCTtcx4arWA4VcYFJVirR8Zpq500u5xWYyGmQf-c3VXbOsEbRdMgAmAsy92uvnyhRW4icaaOzZ9opQKmfqjbF5hvdESIxgZaDHep4Yr4dIsMTlR7Db58Y0E1VbmKR6VFfmaeo/s1600/Screen+Shot+2014-04-20+at+6.53.50+PM.png';
+                    
+                }, 1000);
+                
+                
+            });
+            
+            img.addEventListener('mousemove', 
+            function()
+            {
+                
+                setTimeout(function()
+                {
+                    
+                    p.innerText = "Katchau!";
+                    img.src = 'https://lumiere-a.akamaihd.net/v1/images/cars80-1200x801_7b6d9330.jpeg?region=0,60,1200,677';
+                    
+                }, 1000);
+                
+            });
+            
+            img.addEventListener('click', 
+            function()
+            {
+                
+                setTimeout(function()
+                {
+                    
+                    p.innerText = "Você bateu no Relampago McQueen!";
+                    img.src = 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjg1Ko2-Uo8BVC_37RZOpTaoS_6yVB-EENnmUEl9V61xBZYx18a8_8mAr6tC_0jDsUaO5ookIQYkshMKibcR3_627N0PKg0pBgQx_NIKddKMid-AMib-IBd2x4Urib2dVBvzJUG80flJgE/s1600/281674.jpg-r_1920_1080-f_jpg-q_x-xxyxx.jpg';
+                    
+                }, 1000);
+                
+                
                 
             });
             
