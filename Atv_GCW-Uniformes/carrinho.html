@@ -28,7 +28,49 @@
             
             <div class="produto" id="0">
                 
-                <!-- Lista do produto -->
+                <div class="imagem">
+                    
+                    <img src="https://umbro.vtexassets.com/arquivos/ids/468561/U31G02692_231.jpg?v=638469949342770000" alt="">
+                    
+                </div>
+                
+                <h2>Camisa Grêmio Branca</h2>
+                    
+                    <div class="precoDiv">
+                    <p>Preço: </p>
+                    <p class="preco">$399,99</p>
+                    
+                </div>
+                
+                <div class="quantidadeDiv">
+                    
+                    <p>Quantidade:</p>
+                    
+                    <div class="quantidadeDivDiv">
+                        
+                        <button class="diminuir">-</button>
+                        <p class="quantidade">1</p>
+                        <button class="aumentar">+</button>
+                        
+                        <a class="removerCarrinho" href=""><i class="bi bi-trash"></i></a>
+                        
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+            <!-- Lista de produtos -->
+            
+            
+        </div>
+        
+        <div class="container2">
+            
+            <div class="valorTotal">
+                
+                <p>Valor Total: </p>
+                <p class="valorTotalNumero">$399,99</p>
                 
             </div>
             
@@ -39,6 +81,116 @@
             <p>GCW Uniformes©. Todos os direitos reservados©.</p>
             
         </footer>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <script>
+            
+            document.addEventListener('DOMContentLoaded', () => 
+            {
+                
+                const container = document.querySelector('.container');
+                
+                function carregarProduto() 
+                {
+                    
+                    for (let i = 0; i < localStorage.length; i++) 
+                    {
+                        
+                        const ID = localStorage.key(i);
+                        let produto = JSON.parse(localStorage.getItem(ID));
+                        
+                        const produtoDiv = document.createElement('div');
+                        produtoDiv.className = 'produto';
+                        produtoDiv.id = ID;
+                        
+                        produtoDiv.innerHTML = 
+                        `
+                            <div class="imagem">
+                                
+                                <img src="${produto.imagem}" alt="">
+                                
+                            </div>
+                            
+                            <h2>${produto.nome}</h2>
+                            
+                            <div class="precoDiv">
+                                
+                                <p>Preço: </p>
+                                <p class="preco">${produto.preco}</p>
+                                
+                            </div>
+                            
+                            <div class="quantidadeDiv">
+                                
+                                <p>Quantidade:</p>
+                                
+                                <div class="quantidadeDivDiv">
+                                    
+                                    <button class="diminuir">-</button>
+                                    <p class="quantidade">${produto.quantidade}</p>
+                                    <button class="aumentar">+</button>
+                                    
+                                    <a class="removerCarrinho" href="#"><i class="bi bi-trash"></i></a>
+                                    
+                                </div>
+                                
+                            </div>
+                        `;
+                        
+                        container.appendChild(produtoDiv);
+                        
+                        produtoDiv.querySelector('.diminuir').addEventListener('click', () => atualizarQuantidade(ID, -1));
+                        produtoDiv.querySelector('.aumentar').addEventListener('click', () => atualizarQuantidade(ID, 1));
+                        
+                        produtoDiv.querySelector('.removerCarrinho').addEventListener('click', (e) => 
+                        {
+                            
+                            e.preventDefault();
+                            removeProduto(ID);
+                            
+                        });
+                    }
+                }
+                
+                function atualizarQuantidade(ID, change) 
+                {
+                    
+                    const produto = JSON.parse(localStorage.getItem(ID));
+                    produto.quantidade += change;
+                    
+                    if (produto.quantidade <= 0) 
+                    {
+                        
+                        produto.quantidade = 1;
+                        
+                    }
+                    
+                    localStorage.setItem(ID, JSON.stringify(produto));
+                    document.getElementById(ID).querySelector('.quantidade').textContent = produto.quantidade;
+                    
+                }
+                
+                function removeProduto(ID) 
+                {
+                    
+                    localStorage.removeItem(ID);
+                    document.getElementById(ID).remove();
+                    
+                }
+                
+                carregarProduto();
+                
+            });
+            
+        </script>
         
     </body>
     

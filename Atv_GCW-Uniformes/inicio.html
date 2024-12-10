@@ -119,100 +119,108 @@
             
             document.addEventListener('DOMContentLoaded', () => 
             {
-            
-            const carrinho = [];
-            const botoesAdicionar = document.querySelectorAll('.addCarrinho');
-            const contadorCarrinho = document.querySelector('.itensCarrinhoContagem');
-            
-            botoesAdicionar.forEach(botao => 
-            {
                 
-                botao.addEventListener('click', (event) => 
-                {
+                const carrinho = carregarCarrinho();
+                const botoesAdicionar = document.querySelectorAll('.addCarrinho');
+                const contadorCarrinho = document.querySelector('.itensCarrinhoContagem');
                 
-                const produtoDiv = event.target.closest('.produto');
-                const produtoId = produtoDiv.id;
-                const produtoNome = produtoDiv.querySelector('h2').innerText;
-                const produtoPreco = parseFloat(produtoDiv.querySelector('.preco').innerText.replace('$', '').replace(',', '.'));
-                
-                const produtoExistente = carrinho.find(produto => produto.id === produtoId);
-                
-                if (produtoExistente) 
+                botoesAdicionar.forEach(botao => 
                 {
                     
-                    produtoExistente.quantidade += 1;
-                    
-                } else 
-                {
-                    carrinho.push
-                    ({
-                    
-                    id: produtoId,
-                    nome: produtoNome,
-                    preco: produtoPreco,
-                    quantidade: 1
-                    
+                    botao.addEventListener('click', (event) => 
+                    {
+                        
+                        const produtoDiv = event.target.closest('.produto');
+                        const produtoId = produtoDiv.id;
+                        const produtoNome = produtoDiv.querySelector('h2').innerText;
+                        const produtoPreco = parseFloat(produtoDiv.querySelector('.preco').innerText.replace('$', '').replace(',', '.'));
+                        // basicamente ele transforma o valor do preço em um número, tirando o $ e substituindo a vírgula por ponto
+                        const produtoImagem = produtoDiv.querySelector('.imagem img').src;
+                        
+                        const produtoExistente = carrinho.find(produto => produto.id == produtoId);
+                        // verifica se o produto já existe no carrinho
+                        
+                        if (produtoExistente) 
+                        {
+                            
+                            produtoExistente.quantidade += 1;
+                            
+                        } 
+                        else 
+                        {
+                            
+                            carrinho.push
+                            ({
+                                
+                                id: produtoId,
+                                nome: produtoNome,
+                                preco: produtoPreco,
+                                imagem: produtoImagem,
+                                quantidade: 1
+                                
+                            });
+                            
+                        }
+                        
+                        atualizarContadorCarrinho();
+                        atualizarValorTotal();
+                        salvarCarrinho();
+                        
                     });
                     
-                }
-                
-                atualizarContadorCarrinho();
-                atualizarValorTotal();
-                
                 });
                 
-            });
-            
-            function atualizarContadorCarrinho() 
-            {
-                
-                let totalItens = carrinho.reduce((total, produto) => total + produto.quantidade, 0);
-                contadorCarrinho.innerText = totalItens;
-                
-            }
-            
-            function atualizarValorTotal() 
-            {
-                
-                let valorTotal = carrinho.reduce((total, produto) => total + (produto.preco * produto.quantidade), 0);
-                console.log(`Valor Total: $${valorTotal.toFixed(2)}`);
-                
-            }
-            
-            // Função para remover item do carrinho
-            function removerItemCarrinho(produtoId) 
-            {
-                
-                const index = carrinho.findIndex(produto => produto.id === produtoId);
-                
-                if (index !== -1) 
+                function atualizarContadorCarrinho() 
                 {
+                    
+                    let totalItens = carrinho.reduce((total, produto) => total + produto.quantidade, 0);
+                    // isto é uma função que soma a quantidade de cada produto no carrinho cmc por 0
+                    contadorCarrinho.innerText = totalItens;
+                    
+                }
                 
-                carrinho.splice(index, 1);
+                function atualizarValorTotal() 
+                {
+                    
+                    let valorTotal = carrinho.reduce((total, produto) => total + (produto.preco * produto.quantidade), 0);
+                    // mesma coisa que o atualizarContadorCarrinho, mas que soma o preço de cada produto multiplicado pela quantidade no carrinho
+                    console.log(`Valor Total: $${valorTotal.toFixed(2)}`);
+                    
+                }
+                
+                function salvarCarrinho() 
+                {
+                    
+                    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+                    // transforma o carrinho (stringify) em uma string e salva no localStorage (localStorage.setItem)
+                    
+                }
+                
+                function carregarCarrinho() 
+                {
+                    
+                    const carrinhoSalvo = localStorage.getItem('carrinho');
+                    
+                    if (carrinhoSalvo) 
+                    {
+                        
+                        return JSON.parse(carrinhoSalvo);
+                        // transforma a string em um objeto (JSON.parse)
+                        
+                    } else 
+                    {
+                        
+                        return [];
+                        
+                    }
+                    
+                }
+                
+                document.querySelector('.carrinho').addEventListener('click', salvarCarrinho);
+                
                 atualizarContadorCarrinho();
                 atualizarValorTotal();
                 
-                }
-                
-            }
-            
-            // Função para alterar quantidade de um item
-            function alterarQuantidadeItemCarrinho(produtoId, novaQuantidade) 
-            {
-                
-                const produto = carrinho.find(produto => produto.id === produtoId);
-                
-                if (produto) 
-                {
-                
-                produto.quantidade = novaQuantidade;
-                atualizarContadorCarrinho();
-                atualizarValorTotal();
-                
-                }
-                
-            }
-            
             });
             
         </script>
