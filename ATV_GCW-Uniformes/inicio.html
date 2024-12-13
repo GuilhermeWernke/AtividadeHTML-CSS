@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Uniformes</title>
+        
+        <link rel="stylesheet" href="inicio.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        
+    </head>
+    
+    <body>
+        
+        <header>
+            
+            <h1>Loja GCW Uniformes©</h1>
+            <p>Aqui temos o melhor Uniforme</p>
+            
+            <a class="carrinho" href="carrinho.html"><i class="bi bi-cart4"></i></a>
+            <p class="itensCarrinhoContagem">0</p>
+            
+        </header>
+        
+        <div class="container">
+            
+            <div class="produto" id="0">
+                
+                <h2>Camisa Grêmio <br> Preta</h2>
+                
+                <div class="imagem">
+                    
+                    <img src="https://gaston.vtexassets.com/arquivos/ids/2032809/-Camisa-Gremio-Umbro-III-2023-Classic-Com-Numero-9-Preta-Masculina.jpg?v=638617709797100000" alt="">
+                    
+                </div>
+                
+                <p class="preco">$399,99</p>
+                
+                <button class="addCarrinho">Adicionar ao Carrinho</button>
+                
+                <p>Camisa do Gremio Umbro 2023 Preta, Com Numero 9, Preta, Masculina, tamanhos do PP ao GG</p>
+                
+            </div>
+            
+            <div class="produto" id="1">
+                
+                <h2>Camisa Grêmio <br> Treino</h2>
+                
+                <div class="imagem">
+                    
+                    <img src="https://acdn.mitiendanube.com/stores/002/341/698/products/_camisa-treino-gremio-2023-desconto-10-frete-gratis-tevo-sports-11-6d79154f8999a9c7a116854775130561-1024-1024.png" alt="">
+                    
+                </div>
+                
+                <p class="preco">$150,99</p>
+                
+                <button class="addCarrinho">Adicionar ao Carrinho</button>
+                
+                <p>Camisa do Gremio Umbro 2023 de Treino, sem número, Masculina, tamanhos do PP ao GG</p>
+                
+            </div>
+            
+            <div class="produto" id="2">
+                
+                <h2>Camisa Grêmio Clássica</h2>
+                
+                <div class="imagem">
+                    
+                    <img src="https://gaston.vtexassets.com/arquivos/ids/1807194/Camisa-Masculina-Umbro-Gremio-Oficial-1-2024-Jogador-Sem-Numero.jpg?v=638571516574670000" alt="">
+                    
+                </div>
+                
+                <p class="preco">$295,50</p>
+                
+                <button class="addCarrinho">Adicionar ao Carrinho</button>
+                
+                <p>Camisa do Gremio Umbro 2024 Clássica, sem número, Masculina, tamanhos do PP ao GG</p>
+                
+            </div>
+            
+            <div class="produto" id="3">
+                
+                <h2>Camisa Grêmio <br> Branca</h2>
+                
+                <div class="imagem">
+                    
+                    <img src="https://umbro.vtexassets.com/arquivos/ids/468561/U31G02692_231.jpg?v=638469949342770000" alt="">
+                    
+                </div>
+                
+                <p class="preco">$110,90</p>
+                
+                <button class="addCarrinho">Adicionar ao Carrinho</button>
+                
+                <p>Camisa do Grêmio Umbro 2024 Branca, sem número, Masculina, tamanhos do PP ao GG</p>
+                
+            </div>
+            
+        </div>
+        
+        <footer>
+            
+            <p>GCW Uniformes©. Todos os direitos reservados©.</p>
+            
+        </footer>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <script>
+            
+            document.addEventListener('DOMContentLoaded', () => 
+            {
+                
+                const carrinho = carregarCarrinho();
+                const botoesAdicionar = document.querySelectorAll('.addCarrinho');
+                const contadorCarrinho = document.querySelector('.itensCarrinhoContagem');
+                
+                botoesAdicionar.forEach(botao => 
+                {
+                    
+                    botao.addEventListener('click', (event) => 
+                    {
+                        
+                        const produtoDiv = event.target.closest('.produto');
+                        const produtoId = produtoDiv.id;
+                        const produtoNome = produtoDiv.querySelector('h2').innerText;
+                        const produtoPreco = parseFloat(produtoDiv.querySelector('.preco').innerText.replace('$', '').replace(',', '.'));
+                        // basicamente ele transforma o valor do preço em um número, tirando o $ e substituindo a vírgula por ponto
+                        const produtoImagem = produtoDiv.querySelector('.imagem img').src;
+                        
+                        const produtoExistente = carrinho.find(produto => produto.id == produtoId);
+                        // verifica se o produto já existe no carrinho
+                        
+                        if (produtoExistente) 
+                        {
+                            
+                            produtoExistente.quantidade += 1;
+                            
+                        } 
+                        else 
+                        {
+                            
+                            carrinho.push
+                            ({
+                                
+                                id: produtoId,
+                                nome: produtoNome,
+                                preco: produtoPreco,
+                                imagem: produtoImagem,
+                                quantidade: 1
+                                
+                            });
+                            
+                        }
+                        
+                        atualizarContadorCarrinho();
+                        atualizarValorTotal();
+                        salvarCarrinho();
+                        
+                    });
+                    
+                });
+                
+                function atualizarContadorCarrinho() 
+                {
+                    
+                    let totalItens = carrinho.reduce((total, produto) => total + produto.quantidade, 0);
+                    // isto é uma função que soma a quantidade de cada produto no carrinho cmc por 0
+                    contadorCarrinho.innerText = totalItens;
+                    
+                }
+                
+                function atualizarValorTotal() 
+                {
+                    
+                    let valorTotal = carrinho.reduce((total, produto) => total + (produto.preco * produto.quantidade), 0);
+                    // mesma coisa que o atualizarContadorCarrinho, mas que soma o preço de cada produto multiplicado pela quantidade no carrinho
+                    console.log(`Valor Total: $${valorTotal.toFixed(2)}`);
+                    
+                }
+                
+                function salvarCarrinho() 
+                {
+                    
+                    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+                    // transforma o carrinho (stringify) em uma string e salva no localStorage (localStorage.setItem)
+                    
+                }
+                
+                function carregarCarrinho() 
+                {
+                    
+                    const carrinhoSalvo = localStorage.getItem('carrinho');
+                    
+                    if (carrinhoSalvo) 
+                    {
+                        
+                        return JSON.parse(carrinhoSalvo);
+                        // transforma a string em um objeto (JSON.parse)
+                        
+                    } else 
+                    {
+                        
+                        return [];
+                        
+                    }
+                    
+                }
+                
+                document.querySelector('.carrinho').addEventListener('click', salvarCarrinho);
+                
+                atualizarContadorCarrinho();
+                atualizarValorTotal();
+                
+            });
+            
+        </script>
+        
+    </body>
+    
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Uniformes</title>
+        
+        <link rel="stylesheet" href="carrinho.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        
+    </head>
+    
+    <body>
+        
+        <header>
+            
+            <h1>Loja GCW Uniformes©</h1>
+            <p>Aqui temos o melhor Uniforme</p>
+            
+            <a class="inicio" href="inicio.html"><i class="bi bi-house"></i></a>
+            
+        </header>
+        
+        <div class="container">
+            
+            <!-- Exemplo -->
+            
+            <!-- <div class="produto" id="0">
+                
+                <div class="imagem">
+                    
+                    <img src="https://umbro.vtexassets.com/arquivos/ids/468561/U31G02692_231.jpg?v=638469949342770000" alt="">
+                    
+                </div>
+                
+                <h2>Camisa Grêmio Branca</h2>
+                
+                <div class="precoDiv">
+                    
+                    <p>Preço: </p>
+                    <p class="preco">$399,99</p>
+                    
+                </div>
+                
+                <div class="quantidadeDiv">
+                    
+                    <p>Quantidade:</p>
+                    
+                    <div class="quantidadeDivDiv">
+                        
+                        <button class="diminuir">-</button>
+                        <p class="quantidade">1</p>
+                        <button class="aumentar">+</button>
+                        
+                        <a class="removerCarrinho" href=""><i class="bi bi-trash"></i></a>
+                        
+                    </div>
+                    
+                </div>
+                
+            </div> -->
+            
+            <!-- Lista de produtos -->
+            
+            
+        </div>
+        
+        <div class="container2">
+            
+            <div class="valorTotal">
+                
+                <p>Valor Total: </p>
+                <p class="valorTotalNumero">$399,99</p>
+                
+            </div>
+            
+        </div>
+        
+        <footer>
+            
+            <p>GCW Uniformes©. Todos os direitos reservados©.</p>
+            
+        </footer>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <script>
+            
+            document.addEventListener('DOMContentLoaded', () => 
+            {
+                
+                const container = document.querySelector('.container');
+                const produtos = JSON.parse(localStorage.getItem("carrinho"));
+                
+                function carregarProduto() 
+                {
+                    
+                    for (let i = 0; i < produtos.length; i++) 
+                    {
+                        
+                        const produtoDiv = document.createElement('div');
+                        produtoDiv.className = 'produto';
+                        
+                        produtoDiv.id = produtos[i].id;
+                        
+                        produtoDiv.innerHTML = 
+                        `
+                            <div class="imagem">
+                                
+                                <img src="${produtos[i].imagem}" alt="">
+                                
+                            </div>
+                            
+                            <h2>${produtos[i].nome}</h2>
+                            
+                            <div class="precoDiv">
+                                
+                                <p>Preço: </p>
+                                <p class="preco">${produtos[i].preco}</p>
+                                
+                            </div>
+                            
+                            <div class="quantidadeDiv">
+                                
+                                <p>Quantidade:</p>
+                                
+                                <div class="quantidadeDivDiv">
+                                    
+                                    <button class="diminuir">-</button>
+                                    <p class="quantidade">${produtos[i].quantidade}</p>
+                                    <button class="aumentar">+</button>
+                                    
+                                    <a class="removerCarrinho"  id="${produtos[i].id}" href="#"><i class="bi bi-trash"></i></a>
+                                    
+                                </div>
+                                
+                            </div>
+                        `;
+                        
+                        container.appendChild(produtoDiv);
+                        
+                        produtoDiv.querySelector('.diminuir').addEventListener('click', () => atualizarQuantidade(produtos[i].id, -1));
+                        produtoDiv.querySelector('.aumentar').addEventListener('click', () => atualizarQuantidade(produtos[i].id, 1));
+                        
+                        produtoDiv.querySelector('.removerCarrinho').addEventListener('click', (e) => 
+                        {
+                            
+                            e.preventDefault();
+                            removeProduto(X);
+                            // FALTA ISSOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+                            
+                        });
+                        
+                    }
+                    
+                }
+                
+                function atualizarQuantidade(ID, mudanca) 
+                {
+                    
+                    for (let i = 0; i < produtos.length; i++) 
+                    {
+                        
+                        if(produtos[i].id == ID)
+                        {
+                            
+                            produtos[i].quantidade += mudanca;
+                            
+                            if (produtos[i].quantidade <= 0) 
+                            {
+                                
+                                produtos[i].quantidade = 1;
+                                
+                            }
+                            
+                            localStorage.setItem(ID, JSON.stringify(produtos[i]));
+                            document.getElementById(ID).querySelector('.quantidade').textContent = produtos[i].quantidade;
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+                function removeProduto(ID) 
+                {
+                    
+                    if(produtos[i].id == ID)
+                    {
+                        
+                        produtos.splice(i, 1);
+                        localStorage.removeItem(ID);
+                        document.getElementById(ID).remove();
+                        
+                    }
+                    
+                }
+                
+                carregarProduto();
+                
+            });
+            
+        </script>
+        
+    </body>
+    
+</html>
