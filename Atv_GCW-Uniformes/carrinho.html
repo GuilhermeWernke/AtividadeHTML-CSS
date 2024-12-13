@@ -26,7 +26,9 @@
         
         <div class="container">
             
-            <div class="produto" id="0">
+            <!-- Exemplo -->
+            
+            <!-- <div class="produto" id="0">
                 
                 <div class="imagem">
                     
@@ -35,8 +37,9 @@
                 </div>
                 
                 <h2>Camisa Grêmio Branca</h2>
+                
+                <div class="precoDiv">
                     
-                    <div class="precoDiv">
                     <p>Preço: </p>
                     <p class="preco">$399,99</p>
                     
@@ -58,7 +61,7 @@
                     
                 </div>
                 
-            </div>
+            </div> -->
             
             <!-- Lista de produtos -->
             
@@ -97,34 +100,33 @@
             {
                 
                 const container = document.querySelector('.container');
+                const produtos = JSON.parse(localStorage.getItem("carrinho"));
                 
                 function carregarProduto() 
                 {
                     
-                    for (let i = 0; i < localStorage.length; i++) 
+                    for (let i = 0; i < produtos.length; i++) 
                     {
-                        
-                        const ID = localStorage.key(i);
-                        let produto = JSON.parse(localStorage.getItem(ID));
                         
                         const produtoDiv = document.createElement('div');
                         produtoDiv.className = 'produto';
-                        produtoDiv.id = ID;
+                        
+                        produtoDiv.id = produtos[i].id;
                         
                         produtoDiv.innerHTML = 
                         `
                             <div class="imagem">
                                 
-                                <img src="${produto.imagem}" alt="">
+                                <img src="${produtos[i].imagem}" alt="">
                                 
                             </div>
                             
-                            <h2>${produto.nome}</h2>
+                            <h2>${produtos[i].nome}</h2>
                             
                             <div class="precoDiv">
                                 
                                 <p>Preço: </p>
-                                <p class="preco">${produto.preco}</p>
+                                <p class="preco">${produtos[i].preco}</p>
                                 
                             </div>
                             
@@ -135,10 +137,10 @@
                                 <div class="quantidadeDivDiv">
                                     
                                     <button class="diminuir">-</button>
-                                    <p class="quantidade">${produto.quantidade}</p>
+                                    <p class="quantidade">${produtos[i].quantidade}</p>
                                     <button class="aumentar">+</button>
                                     
-                                    <a class="removerCarrinho" href="#"><i class="bi bi-trash"></i></a>
+                                    <a class="removerCarrinho"  id="${produtos[i].id}" href="#"><i class="bi bi-trash"></i></a>
                                     
                                 </div>
                                 
@@ -147,42 +149,60 @@
                         
                         container.appendChild(produtoDiv);
                         
-                        produtoDiv.querySelector('.diminuir').addEventListener('click', () => atualizarQuantidade(ID, -1));
-                        produtoDiv.querySelector('.aumentar').addEventListener('click', () => atualizarQuantidade(ID, 1));
+                        produtoDiv.querySelector('.diminuir').addEventListener('click', () => atualizarQuantidade(produtos[i].id, -1));
+                        produtoDiv.querySelector('.aumentar').addEventListener('click', () => atualizarQuantidade(produtos[i].id, 1));
                         
                         produtoDiv.querySelector('.removerCarrinho').addEventListener('click', (e) => 
                         {
                             
                             e.preventDefault();
-                            removeProduto(ID);
+                            removeProduto(X);
+                            // FALTA ISSOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
                             
                         });
+                        
                     }
+                    
                 }
                 
-                function atualizarQuantidade(ID, change) 
+                function atualizarQuantidade(ID, mudanca) 
                 {
                     
-                    const produto = JSON.parse(localStorage.getItem(ID));
-                    produto.quantidade += change;
-                    
-                    if (produto.quantidade <= 0) 
+                    for (let i = 0; i < produtos.length; i++) 
                     {
                         
-                        produto.quantidade = 1;
+                        if(produtos[i].id == ID)
+                        {
+                            
+                            produtos[i].quantidade += mudanca;
+                            
+                            if (produtos[i].quantidade <= 0) 
+                            {
+                                
+                                produtos[i].quantidade = 1;
+                                
+                            }
+                            
+                            localStorage.setItem(ID, JSON.stringify(produtos[i]));
+                            document.getElementById(ID).querySelector('.quantidade').textContent = produtos[i].quantidade;
+                            
+                        }
                         
                     }
-                    
-                    localStorage.setItem(ID, JSON.stringify(produto));
-                    document.getElementById(ID).querySelector('.quantidade').textContent = produto.quantidade;
                     
                 }
                 
                 function removeProduto(ID) 
                 {
                     
-                    localStorage.removeItem(ID);
-                    document.getElementById(ID).remove();
+                    if(produtos[i].id == ID)
+                    {
+                        
+                        produtos.splice(i, 1);
+                        localStorage.removeItem(ID);
+                        document.getElementById(ID).remove();
+                        
+                    }
                     
                 }
                 
