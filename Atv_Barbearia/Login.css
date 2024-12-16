@@ -1,0 +1,101 @@
+*
+{
+    
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    
+}
+
+
+body
+{
+    
+    font-family: "Catamaran", sans-serif;
+    background-color: #000020;
+    color: #8d4925;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+}
+
+form
+{
+    
+    text-align: center;
+    
+}
+
+
+.grupo
+{
+    
+    width: 500px;
+    
+    background-color: #b96e48;
+    
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    
+    padding: 10px;
+    
+    border-radius: 5px;
+    
+    position: relative;
+    
+}
+
+input
+{
+    
+    outline: none;
+    
+    text-align: center;
+    
+    width: 400px;
+    height: 20px;
+    
+    border-radius: 5px;
+    
+}
+
+input.invalido
+{
+    
+    border: solid 2px tomato;
+    
+}
+
+.erro
+{
+    
+    display: none;
+    
+    color: tomato;
+    
+    text-align: center;
+    font-weight: bold;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color:  #19242f;
+    
+    max-width: 400px;
+    
+}
+
+.mostrarSenha
+{
+    
+    color: #19242f;
+    
+    position: absolute;
+    z-index: 1;
+    
+    right: 65px;
+    top: 74px;
+    
+}

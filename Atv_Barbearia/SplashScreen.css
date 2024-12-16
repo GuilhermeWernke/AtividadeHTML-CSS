@@ -1,0 +1,71 @@
+*
+{
+    
+    height: auto;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+.splashScreen
+{
+    
+    width: auto;
+    height: 100vh;
+    /* Testei todas as combinações de auto, 100% e 100vh, está foi a melhor! */
+    
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.splashScreen img
+{
+    
+    width: 100%;
+    height: 100%;
+    
+}
+
+/* Celular */
+@media screen and (max-width: 767px)
+{
+    
+    .splashScreen img
+    {
+        
+        content: url("Imagens/GCW_Barbearia_9:16-3.jpg");
+        
+    }
+    
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) and (max-width: 1023px)
+{
+    
+    .splashScreen img
+    {
+        
+        content: url("Imagens/GCW_Barbearia_3:4-1.jpg");
+        
+    }
+    
+}
+
+/* Computador */
+@media screen and  (min-width: 1024px)
+{
+    
+    .splashScreen img
+    {
+        
+        content: url("Imagens/GCW_Barbearia_16:9-3.jpg");
+        
+    }
+    
+}

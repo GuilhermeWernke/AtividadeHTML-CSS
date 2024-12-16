@@ -1,0 +1,126 @@
+*
+{
+    
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    
+}
+
+html, body
+{
+    
+    background-color: #000020;
+    color: #8d4925;
+    
+    font-family: Arial, sans-serif;
+    height: 100%;
+    
+}
+
+header
+{
+    
+    background-color: #8d4925;
+    border-bottom: #19242f 3px solid;
+    color: #19242f;
+    
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    flex-direction: row;
+    
+    padding: 0px 30px;
+    
+    font-size: 20px;
+    
+}
+
+header i
+{
+    
+    cursor: pointer;
+    
+    font-size: 35px;
+    
+}
+
+header img
+{
+    
+    width: 150px;
+    height: 150px;
+    
+}
+
+.container
+{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    padding: 20px;
+    
+}
+
+.container .servico
+{
+    
+    background-color: #171a4a;
+    color: #b96e48;
+    
+    margin: 10px;
+    padding: 20px;
+    
+    border-radius: 10px;
+    
+    width: 100%;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    
+}
+
+/* criei a div só pq tava com preguiça de mecher no espaço entre os itens (space between ou aroun, estou vendo qual o melhor).
+E tb queria deixar a imagem e o h2 um do lado do outro sem o espacamento desta justificação de conteudo, o serviço mais rápido foi criar uma Div!
+É o certo? Creio que não, funciona? Sim, então não vou mecher!
+bjs, e obrigado por ler Jeffinho e futuro eu copiando coisa que fiz de outros projetos kkkkk <3 */
+
+.container .servico .imgTitulo
+{
+    
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    
+}
+
+.container .servico .imgTitulo img
+{
+    
+    border: #000020 1px solid;
+    border-radius: 10px;
+    
+    width: 100px;
+    height: 100px;
+    
+}
+
+.container .servico .imgTitulo h2
+{
+    
+    margin-left: 10px;
+    
+}
+
+.container .servico .precoDiv
+{
+    
+    display: flex;
+    flex-direction: row;
+    
+}
