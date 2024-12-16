@@ -93,28 +93,37 @@
         
         
         
-        
         <script>
             
             document.addEventListener('DOMContentLoaded', () => 
             {
                 
+                const valorTotalNumero = document.querySelector('.valorTotalNumero');
                 const container = document.querySelector('.container');
                 const produtos = JSON.parse(localStorage.getItem("carrinho"));
                 
                 function carregarProduto() 
                 {
                     
+                    if (produtos.length == 0) 
+                    {
+                        
+                        window.location.href = "inicio.html";
+                        
+                    }
+                    
+                    container.innerHTML = ''; 
+                    // Deleta todos os produtos do carrinho, um Refrash
+                    
                     for (let i = 0; i < produtos.length; i++) 
                     {
                         
                         const produtoDiv = document.createElement('div');
                         produtoDiv.className = 'produto';
-                        
                         produtoDiv.id = produtos[i].id;
-                        
                         produtoDiv.innerHTML = 
                         `
+                            
                             <div class="imagem">
                                 
                                 <img src="${produtos[i].imagem}" alt="">
@@ -139,25 +148,20 @@
                                     <button class="diminuir">-</button>
                                     <p class="quantidade">${produtos[i].quantidade}</p>
                                     <button class="aumentar">+</button>
-                                    
                                     <a class="removerCarrinho"  id="${produtos[i].id}" href="#"><i class="bi bi-trash"></i></a>
                                     
                                 </div>
                                 
                             </div>
+                            
                         `;
-                        
                         container.appendChild(produtoDiv);
-                        
                         produtoDiv.querySelector('.diminuir').addEventListener('click', () => atualizarQuantidade(produtos[i].id, -1));
                         produtoDiv.querySelector('.aumentar').addEventListener('click', () => atualizarQuantidade(produtos[i].id, 1));
-                        
-                        produtoDiv.querySelector('.removerCarrinho').addEventListener('click', (e) => 
+                        produtoDiv.querySelector('.removerCarrinho').addEventListener('click', () => 
                         {
                             
-                            e.preventDefault();
-                            removeProduto(X);
-                            // FALTA ISSOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+                            removeProduto(produtos[i].id);
                             
                         });
                         
@@ -165,48 +169,60 @@
                     
                 }
                 
+                function atualizarValorTotal() 
+                {
+                    
+                    let valorTotal = produtos.reduce((total, produto) => total + (produto.preco * produto.quantidade), 0);
+                    // soma o preço de cada produto multiplicado pela quantidade no carrinho
+                    return valorTotal;
+                    
+                }
+                
                 function atualizarQuantidade(ID, mudanca) 
                 {
                     
-                    for (let i = 0; i < produtos.length; i++) 
+                    const produto = produtos.find(p => p.id === ID);
+                    
+                    if (produto) 
                     {
                         
-                        if(produtos[i].id == ID)
-                        {
-                            
-                            produtos[i].quantidade += mudanca;
-                            
-                            if (produtos[i].quantidade <= 0) 
-                            {
-                                
-                                produtos[i].quantidade = 1;
-                                
-                            }
-                            
-                            localStorage.setItem(ID, JSON.stringify(produtos[i]));
-                            document.getElementById(ID).querySelector('.quantidade').textContent = produtos[i].quantidade;
-                            
-                        }
+                        produto.quantidade = Math.max(1, produto.quantidade + mudanca);
+                        
+                        localStorage.setItem("carrinho", JSON.stringify(produtos));
+                        document.getElementById(ID).querySelector('.quantidade').textContent = produto.quantidade;
+                        
+                        valorTotalNumero.innerHTML = "$" + atualizarValorTotal();
                         
                     }
                     
                 }
                 
+                
                 function removeProduto(ID) 
                 {
                     
-                    if(produtos[i].id == ID)
+                    const index = produtos.findIndex(p => p.id === ID);
+                    
+                    if (index !== -1) 
                     {
                         
-                        produtos.splice(i, 1);
-                        localStorage.removeItem(ID);
-                        document.getElementById(ID).remove();
+                        produtos.splice(index, 1);
+                        // remove o produto do array
+                        
+                        localStorage.setItem("carrinho", JSON.stringify(produtos));
+                        // atualiza o localStorage
+                        
+                        carregarProduto();
+                        // recarrega os produtos
+                        
+                        valorTotalNumero.innerHTML = "$" + atualizarValorTotal();
                         
                     }
                     
                 }
                 
                 carregarProduto();
+                valorTotalNumero.innerHTML = "$" + atualizarValorTotal();
                 
             });
             

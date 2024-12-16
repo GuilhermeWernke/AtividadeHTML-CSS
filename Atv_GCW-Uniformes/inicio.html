@@ -163,7 +163,6 @@
                         }
                         
                         atualizarContadorCarrinho();
-                        atualizarValorTotal();
                         salvarCarrinho();
                         
                     });
@@ -176,15 +175,6 @@
                     let totalItens = carrinho.reduce((total, produto) => total + produto.quantidade, 0);
                     // isto é uma função que soma a quantidade de cada produto no carrinho cmc por 0
                     contadorCarrinho.innerText = totalItens;
-                    
-                }
-                
-                function atualizarValorTotal() 
-                {
-                    
-                    let valorTotal = carrinho.reduce((total, produto) => total + (produto.preco * produto.quantidade), 0);
-                    // mesma coisa que o atualizarContadorCarrinho, mas que soma o preço de cada produto multiplicado pela quantidade no carrinho
-                    console.log(`Valor Total: $${valorTotal.toFixed(2)}`);
                     
                 }
                 
@@ -219,7 +209,6 @@
                 document.querySelector('.carrinho').addEventListener('click', salvarCarrinho);
                 
                 atualizarContadorCarrinho();
-                atualizarValorTotal();
                 
             });
             
