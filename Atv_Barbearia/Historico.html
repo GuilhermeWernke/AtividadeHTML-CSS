@@ -6,15 +6,155 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <link rel="stylesheet" href=".css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="Historico.css">
         
-        <title>X</title>
+        <title>Historico</title>
         
     </head>
     
     <body>
         
+        <header>
+            
+            <i class="bi bi-list"></i>
+            
+            <h1>GCW Barbearia</h1>
+            
+            <img src="Imagens/logo.png" alt="Logo da Barbearia">
+            
+        </header>
         
+        <div class="container">
+            
+            <h1>Historico</h1>
+            
+            <div class="grupo">
+                
+                <h2>Seus Agendamentos:</h2>
+                <!--                                                                                /_ Yohuuuuul   (era para ser um balão de fala rs)   -->
+                <!-- Fiz uns p enfeite, mas está funcionando enviar pelo agendamento e ver aqui \(°o°)/ -->
+                
+                <div class="agendamento">
+                    
+                    <p>Você Agendou em Nossa Barbearia no Dia:</p>
+                    <p class="Data">2024-10-25</p>
+                    <p>Na eguinte Hora:</p>
+                    <p class="Hora">10:25</p>
+                    <p> O(s) Servico(s): </p>
+                    <p class="Servicos">Combo.</p>
+                    
+                </div>
+                
+                <div class="agendamento">
+                    
+                    <p>Você Agendou em Nossa Barbearia no Dia:</p>
+                    <p class="Data">2024-07-30</p>
+                    <p>Na eguinte Hora:</p>
+                    <p class="Hora">19:07</p>
+                    <p> O(s) Servico(s): </p>
+                    <p class="Servicos">Corte.</p>
+                    
+                </div>
+                
+                <div class="agendamento">
+                    
+                    <p>Você Agendou em Nossa Barbearia no Dia:</p>
+                    <p class="Data">2024-05-19</p>
+                    <p>Na eguinte Hora:</p>
+                    <p class="Hora">15:48</p>
+                    <p> O(s) Servico(s): </p>
+                    <p class="Servicos">Corte Barba.</p>
+                    
+                </div>
+                
+                <div class="agendamento">
+                    
+                    <p>Você Agendou em Nossa Barbearia no Dia:</p>
+                    <p class="Data">2024-03-12</p>
+                    <p>Na eguinte Hora:</p>
+                    <p class="Hora">09:12</p>
+                    <p> O(s) Servico(s): </p>
+                    <p class="Servicos">Corte Barba.</p>
+                    
+                </div>
+                
+                <div class="agendamento">
+                    
+                    <p>Você Agendou em Nossa Barbearia no Dia:</p>
+                    <p class="Data">2023-12-22</p>
+                    <p>Na eguinte Hora:</p>
+                    <p class="Hora">08:57</p>
+                    <p> O(s) Servico(s): </p>
+                    <p class="Servicos">Corte Barba.</p>
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        <script>
+            
+            document.addEventListener('DOMContentLoaded', function() 
+            {
+                
+                const agendamentos = JSON.parse(localStorage.getItem('agendamento'));
+                const agendamentoContainer = document.querySelector('.grupo');
+                
+                if (Array.isArray(agendamentos)) 
+                {
+                    
+                    agendamentos.forEach(agendamento => 
+                    {
+                        
+                        const agendamentoItem = document.createElement('div');
+                        agendamentoItem.classList.add('agendamento');
+                        
+                        const textinho1 = document.createElement('p');
+                        textinho1.innerHTML = 'Você Agendou em Nossa Barbearia no Dia:';
+                        agendamentoItem.appendChild(textinho1);
+                        
+                        const data = document.createElement('p');
+                        data.innerHTML = `Data: ${agendamento.data}`;
+                        agendamentoItem.appendChild(data);
+                        
+                        const textinho2 = document.createElement('p');
+                        textinho2.innerHTML = 'Na seguinte Hora:';
+                        agendamentoItem.appendChild(textinho2);
+                        
+                        const hora = document.createElement('p');
+                        hora.innerHTML = `Hora: ${agendamento.hora}`;
+                        agendamentoItem.appendChild(hora);
+                        
+                        const textinho3 = document.createElement('p');
+                        textinho3.innerHTML = 'O(s) Servico(s):';
+                        agendamentoItem.appendChild(textinho3);
+                        
+                        const servicos = document.createElement('p');
+                        servicos.innerHTML = `Serviços: ${agendamento.servicos.join(', ')}`;
+                        agendamentoItem.appendChild(servicos);
+                        
+                        agendamentoContainer.appendChild(agendamentoItem);
+                        
+                    });
+                    
+                } else 
+                {
+                    
+                    console.log('Agendamentos não é um array:', agendamentos);
+                    
+                }
+                
+            });
+            
+        </script>
         
     </body>
     
