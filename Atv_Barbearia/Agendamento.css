@@ -20,44 +20,6 @@ html, body
     flex-direction: column;
     
 }
-
-header
-{
-    
-    background-color: #8d4925;
-    border-bottom: #19242f 3px solid;
-    color: #19242f;
-    
-    display: flex;
-    justify-content:space-between;
-    align-items: center;
-    flex-direction: row;
-    
-    gap: 5px;
-    
-    padding: 0px 30px;
-    
-    font-size: 20px;
-    
-}
-
-header i
-{
-    
-    cursor: pointer;
-    
-    font-size: 35px;
-    
-}
-
-header img
-{
-    
-    width: 150px;
-    height: 150px;
-    
-}
-
 .containerDoContainer
 {
     
@@ -83,7 +45,7 @@ header img
     
     border-radius: 10px;
     
-    width: 40%;
+    width: 60%;
     
     margin: 20px;
     padding: 20px;
@@ -151,13 +113,6 @@ header img
 @media screen and (max-width: 767px)
 {
     
-    header
-    {
-        
-        flex-direction: column-reverse;
-        
-    }
-    
     .containerDoContainer .container
     {
         
@@ -174,21 +129,5 @@ header img
         flex-direction: column;
         
     }
-    
-}
-
-/* Tablet */
-@media screen and (min-width: 768px) and (max-width: 1023px)
-{
-    
-    
-    
-}
-
-/* Computador */
-@media screen and  (min-width: 1024px)
-{
-    
-    
     
 }
